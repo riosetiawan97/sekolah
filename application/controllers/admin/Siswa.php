@@ -138,8 +138,14 @@ class Siswa extends CI_Controller{
 		redirect('admin/siswa');
 	}
 
-	function absen(){
-		$x['data']=$this->m_siswa->get_absen_siswa();
+	function absen(){		
+		$start_date=str_replace("-","",$this->input->post('start_date'));
+		if(!empty($start_date)){
+			$x['data']=$this->m_siswa->absen_siswa_range($start_date,$start_date);
+		}else{
+			$x['data']=$this->m_siswa->get_absen_siswa();
+		}
+		$x['start_date']=$start_date;
 		$x['setup']=$this->m_setup->get_setup()->row();
 		$nama_sekolah=$x['setup']->nama_sekolah;
 		//$this->load->view('admin/v_guru',$x);

@@ -34,6 +34,7 @@
                     <button type="submit" class="btn btn-default btn-submit">SUBMIT</button>
                 </form>
                 </div>  
+                <?php echo $start_date ?>
                 <thead>
                 <tr>
 					          <th style="width:70px;">#Tanggal</th>
