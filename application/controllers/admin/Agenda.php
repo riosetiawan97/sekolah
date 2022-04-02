@@ -8,12 +8,17 @@ class Agenda extends CI_Controller{
         };
 		$this->load->model('m_agenda');
 		$this->load->library('upload');
+		$this->load->model('m_setup');
 	}
 
 
 	function index(){
 		$x['data']=$this->m_agenda->get_all_agenda();
-		$this->load->view('admin/v_agenda',$x);
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_agenda',$x);
+		$x['title']="Admin $nama_sekolah | Agenda";
+		$this->template->load('template_admin', 'admin/v_agenda', $x);
 	}
 
 	function simpan_agenda(){

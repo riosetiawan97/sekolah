@@ -4,9 +4,29 @@ class Siswa extends CI_Controller{
 		parent::__construct();
 		$this->load->model('m_siswa');
 		$this->load->model('m_pengunjung');
+		$this->load->model('m_setup');
 		$this->m_pengunjung->count_visitor();
 	}
+
 	function index(){
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+			  //$this->load->view('depan/v_contact');      
+		  $x['title']="$nama_sekolah | Absen Siswa";
+		  $this->template->load('template_depan', 'depan/v_absen_siswa', $x);
+		}
+	
+	  function simpan_absen_siswa(){
+		$tipe='siswa';
+		$nama=$this->input->post('nama',TRUE);
+		$kelas=$this->input->post('kelas',TRUE);
+		$jurusan=$this->input->post('jurusan',TRUE);
+		$this->m_siswa->simpan_absen_siswa($tipe,$nama,$kelas,$jurusan,date('Ymd'),date('His'));
+		echo $this->session->set_flashdata('msg','<br><p><strong> NB: </strong> Terima Kasih Sudah Absen.</p>');
+		redirect('siswa');
+	  }
+
+	/* function index(){
 		$jum=$this->m_siswa->siswa();
         $page=$this->uri->segment(3);
         if(!$page):
@@ -41,10 +61,12 @@ class Siswa extends CI_Controller{
             $this->pagination->initialize($config);
             $x['page'] =$this->pagination->create_links();
 			$x['data']=$this->m_siswa->siswa_perpage($offset,$limit);
+			$x['setup']=$this->m_setup->get_setup()->row();
+			$nama_sekolah=$x['setup']->nama_sekolah;
 			//$this->load->view('depan/v_siswa',$x);
-			$x['title']="Sekolah | Siswa";
+			$x['title']="$nama_sekolah | Siswa";
 			$this->template->load('template_depan', 'depan/v_siswa', $x);
-	}
+	} */
 
 
 

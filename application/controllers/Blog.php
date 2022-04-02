@@ -4,6 +4,7 @@ class Blog extends CI_Controller{
 		parent::__construct();
 		$this->load->model('m_tulisan');
 		$this->load->model('m_pengunjung');
+		$this->load->model('m_setup');
 		$this->m_pengunjung->count_visitor();
 	}
 	function index(){
@@ -19,33 +20,35 @@ class Blog extends CI_Controller{
             $config['total_rows'] = $jum->num_rows();
             $config['per_page'] = $limit;
             $config['uri_segment'] = 3;
-						//Tambahan untuk styling
-	          $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-	          $config['full_tag_close']   = '</ul></nav></div>';
-	          $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
-	          $config['num_tag_close']    = '</span></li>';
-	          $config['cur_tag_open']     = '<li class="page-item"><span class="page-link">';
-	          $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
-	          $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
-	          $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
-	          $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
-	          $config['prev_tagl_close']  = '</span>Next</li>';
-	          $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
-	          $config['first_tagl_close'] = '</span></li>';
-	          $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
-	          $config['last_tagl_close']  = '</span></li>';
+					//Tambahan untuk styling
+			$config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+			$config['full_tag_close']   = '</ul></nav></div>';
+			$config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+			$config['num_tag_close']    = '</span></li>';
+			$config['cur_tag_open']     = '<li class="page-item"><span class="page-link">';
+			$config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+			$config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+			$config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+			$config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+			$config['prev_tagl_close']  = '</span>Next</li>';
+			$config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+			$config['first_tagl_close'] = '</span></li>';
+			$config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+			$config['last_tagl_close']  = '</span></li>';
             $config['first_link'] = 'Awal';
             $config['last_link'] = 'Akhir';
             $config['next_link'] = 'Next >>';
             $config['prev_link'] = '<< Prev';
             $this->pagination->initialize($config);
             $x['page'] =$this->pagination->create_links();
-						$x['data']=$this->m_tulisan->berita_perpage($offset,$limit);
-						$x['category']=$this->db->get('tbl_kategori');
-						$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
-						//$this->load->view('depan/v_blog',$x);
-						$x['title']="Sekolah | Blog";
-						$this->template->load('template_depan', 'depan/v_blog', $x);
+			$x['data']=$this->m_tulisan->berita_perpage($offset,$limit);
+			$x['category']=$this->db->get('tbl_kategori');
+			$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
+			$x['setup']=$this->m_setup->get_setup()->row();
+			$nama_sekolah=$x['setup']->nama_sekolah;
+			//$this->load->view('depan/v_blog',$x);
+			$x['title']="$nama_sekolah | Blog";
+			$this->template->load('template_depan', 'depan/v_blog', $x);
 	}
 	function detail($slugs){
 		$slug=htmlspecialchars($slugs,ENT_QUOTES);
@@ -57,7 +60,7 @@ class Blog extends CI_Controller{
 			$data=$this->m_tulisan->get_berita_by_kode($kode);
 			$row=$data->row_array();
 			$x['id']=$row['tulisan_id'];
-			$x['title']=$row['tulisan_judul'];
+			$x['title_blog']=$row['tulisan_judul'];
 			$x['image']=$row['tulisan_gambar'];
 			$x['blog'] =$row['tulisan_isi'];
 			$x['tanggal']=$row['tanggal'];
@@ -67,8 +70,12 @@ class Blog extends CI_Controller{
 			$x['show_komentar']=$this->m_tulisan->show_komentar_by_tulisan_id($kode);
 			$x['category']=$this->db->get('tbl_kategori');
 			$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
+			$x['setup']=$this->m_setup->get_setup()->row();
+			$nama_sekolah=$x['setup']->nama_sekolah;
 			//$this->load->view('depan/v_blog_detail',$x);
-			$x['title']="Sekolah | Detail Blog";
+			//$x['title']="$nama_sekolah | Detail Blog";
+			$x['title']=$row['tulisan_judul'];
+			$x['gambar']=$row['tulisan_gambar'];
 			$this->template->load('template_depan', 'depan/v_blog_detail', $x);
 		}else{
 			redirect('artikel');
@@ -82,12 +89,15 @@ class Blog extends CI_Controller{
 			 $x['data']=$query;
 			 $x['category']=$this->db->get('tbl_kategori');
  			 $x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
+			  $x['setup']=$this->m_setup->get_setup()->row();
+			  $nama_sekolah=$x['setup']->nama_sekolah;
 			 //$this->load->view('depan/v_blog',$x);
-			 $x['title']="Sekolah | Blog (".$x['category']->kategori_nama .")";
+			 $x['title']="$nama_sekolah | Blog (".$x['category']->row()->kategori_nama .")";
 			 $this->template->load('template_depan', 'depan/v_blog', $x);
 		 }else{
-			 echo $this->session->set_flashdata('msg','<div class="alert alert-danger">Tidak Ada artikel untuk kategori <b>'.$kategori.'</b></div>');
+			 echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-dismissible" ><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Tidak Ada artikel untuk kategori <b>'.$kategori.'</b></div>');
 			 redirect('artikel');
+			 echo $this->session->set_flashdata();
 		 }
 	}
 
@@ -98,39 +108,41 @@ class Blog extends CI_Controller{
 					$x['data']=$query;
 					$x['category']=$this->db->get('tbl_kategori');
   				$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
+				  $x['setup']=$this->m_setup->get_setup()->row();
+				  $nama_sekolah=$x['setup']->nama_sekolah;
          // $this->load->view('depan/v_blog',$x);
-		  $x['title']="Sekolah | Blog";
+		  $x['title']="$nama_sekolah | Blog";
 		  $this->template->load('template_depan', 'depan/v_blog', $x);
 	 		 }else{
-				 echo $this->session->set_flashdata('msg','<div class="alert alert-danger">Tidak dapat menemukan artikel dengan kata kunci <b>'.$keyword.'</b></div>');
+				 echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-dismissible">Tidak dapat menemukan artikel dengan kata kunci <b>'.$keyword.'</b></div>');
 				 redirect('artikel');
 			 }
     }
 
 		function komentar(){
-				$kode = htmlspecialchars($this->input->post('id',TRUE),ENT_QUOTES);
-				$data=$this->m_tulisan->get_berita_by_kode($kode);
-				$row=$data->row_array();
-				$slug=$row['tulisan_slug'];
-				$nama = htmlspecialchars($this->input->post('nama',TRUE),ENT_QUOTES);
-				$email = htmlspecialchars($this->input->post('email',TRUE),ENT_QUOTES);
-				$komentar = nl2br(htmlspecialchars($this->input->post('komentar',TRUE),ENT_QUOTES));
-				if(empty($nama) || empty($email)){
-					$this->session->set_flashdata('msg','<div class="alert alert-danger">Masukkan input dengan benar.</div>');
-					redirect('artikel/'.$slug);
-				}else{
-					$data = array(
-			        'komentar_nama' 			=> $nama,
-			        'komentar_email' 			=> $email,
-			        'komentar_isi' 				=> $komentar,
-							'komentar_status' 		=> 0,
-							'komentar_tulisan_id' => $kode
-					);
+			$kode = htmlspecialchars($this->input->post('id',TRUE),ENT_QUOTES);
+			$data=$this->m_tulisan->get_berita_by_kode($kode);
+			$row=$data->row_array();
+			$slug=$row['tulisan_slug'];
+			$nama = htmlspecialchars($this->input->post('nama',TRUE),ENT_QUOTES);
+			$email = htmlspecialchars($this->input->post('email',TRUE),ENT_QUOTES);
+			$komentar = nl2br(htmlspecialchars($this->input->post('komentar',TRUE),ENT_QUOTES));
+			if(empty($nama) || empty($email)){
+				$this->session->set_flashdata('msg','<div class="alert alert-danger">Masukkan input dengan benar.</div>');
+				redirect('artikel/'.$slug);
+			}else{
+				$data = array(
+				'komentar_nama' 			=> $nama,
+				'komentar_email' 			=> $email,
+				'komentar_isi' 				=> $komentar,
+						'komentar_status' 		=> 0,
+						'komentar_tulisan_id' => $kode
+				);
 
-					$this->db->insert('tbl_komentar', $data);
-					$this->session->set_flashdata('msg','<div class="alert alert-info">Komentar Anda akan tampil setelah moderasi.</div>');
-					redirect('artikel/'.$slug);
-				}
+				$this->db->insert('tbl_komentar', $data);
+				$this->session->set_flashdata('msg','<div class="alert alert-info">Komentar Anda akan tampil setelah moderasi.</div>');
+				redirect('artikel/'.$slug);
+			}
 		}
 
 }

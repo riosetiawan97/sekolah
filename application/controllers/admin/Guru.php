@@ -9,12 +9,17 @@ class Guru extends CI_Controller{
 		$this->load->model('m_guru');
 		$this->load->model('m_pengguna');
 		$this->load->library('upload');
+		$this->load->model('m_setup');
 	}
 
 
 	function index(){
 		$x['data']=$this->m_guru->get_all_guru();
-		$this->load->view('admin/v_guru',$x);
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_guru',$x);
+		$x['title']="Admin $nama_sekolah | Guru";
+		$this->template->load('template_admin', 'admin/v_guru', $x);
 	}
 	
 	function simpan_guru(){
@@ -139,6 +144,22 @@ class Guru extends CI_Controller{
 		$this->m_guru->hapus_guru($kode);
 		echo $this->session->set_flashdata('msg','success-hapus');
 		redirect('admin/guru');
+	}
+
+	function absen(){
+		$x['data']=$this->m_guru->get_absen_guru();
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_guru',$x);
+		$x['title']="Admin $nama_sekolah | Absen Guru";
+		$this->template->load('template_admin', 'admin/v_absen_guru', $x);
+	}
+
+	function hapus_absen_guru(){
+		$id=$this->input->post('id');
+		$this->m_guru->hapus_absen_guru($id);
+		echo $this->session->set_flashdata('msg','success-hapus');
+		redirect('admin/guru/absen');
 	}
 
 }

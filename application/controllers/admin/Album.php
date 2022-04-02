@@ -9,12 +9,17 @@ class Album extends CI_Controller{
 		$this->load->model('m_album');
 		$this->load->model('m_pengguna');
 		$this->load->library('upload');
+		$this->load->model('m_setup');
 	}
 
 
 	function index(){
 		$x['data']=$this->m_album->get_all_album();
-		$this->load->view('admin/v_album',$x);
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_album',$x);
+		$x['title']="Admin $nama_sekolah | Album";
+		$this->template->load('template_admin', 'admin/v_album', $x);
 	}
 	
 	function simpan_album(){
@@ -33,21 +38,22 @@ class Album extends CI_Controller{
 	                        $config['source_image']='./assets/images/'.$gbr['file_name'];
 	                        $config['create_thumb']= FALSE;
 	                        $config['maintain_ratio']= FALSE;
-	                        $config['quality']= '60%';
+	                       /*  $config['quality']= '60%';
 	                        $config['width']= 500;
-	                        $config['height']= 400;
+	                        $config['height']= 400; */
 	                        $config['new_image']= './assets/images/'.$gbr['file_name'];
 	                        $this->load->library('image_lib', $config);
 	                        $this->image_lib->resize();
 
 	                        $gambar=$gbr['file_name'];
 							$album=strip_tags($this->input->post('xnama_album'));
+							$deskripsi=$this->input->post('deskripsi');
 							$kode=$this->session->userdata('idadmin');
 							$user=$this->m_pengguna->get_pengguna_login($kode);
 							$p=$user->row_array();
 							$user_id=$p['pengguna_id'];
 							$user_nama=$p['pengguna_nama'];
-							$this->m_album->simpan_album($album,$user_id,$user_nama,$gambar);
+							$this->m_album->simpan_album($album,$user_id,$user_nama,$gambar,$deskripsi);
 							echo $this->session->set_flashdata('msg','success');
 							redirect('admin/album');
 					}else{
@@ -78,9 +84,9 @@ class Album extends CI_Controller{
 	                        $config['source_image']='./assets/images/'.$gbr['file_name'];
 	                        $config['create_thumb']= FALSE;
 	                        $config['maintain_ratio']= FALSE;
-	                        $config['quality']= '60%';
+	                        /* $config['quality']= '60%';
 	                        $config['width']= 500;
-	                        $config['height']= 400;
+	                        $config['height']= 400; */
 	                        $config['new_image']= './assets/images/'.$gbr['file_name'];
 	                        $this->load->library('image_lib', $config);
 	                        $this->image_lib->resize();
@@ -88,6 +94,7 @@ class Album extends CI_Controller{
 	                        $gambar=$gbr['file_name'];
 	                        $album_id=$this->input->post('kode');
 	                        $album_nama=strip_tags($this->input->post('xnama_album'));
+							$deskripsi=$this->input->post('deskripsi');
 							$images=$this->input->post('gambar');
 							$path='./assets/images/'.$images;
 							unlink($path);
@@ -96,7 +103,7 @@ class Album extends CI_Controller{
 							$p=$user->row_array();
 							$user_id=$p['pengguna_id'];
 							$user_nama=$p['pengguna_nama'];
-							$this->m_album->update_album($album_id,$album_nama,$user_id,$user_nama,$gambar);
+							$this->m_album->update_album($album_id,$album_nama,$user_id,$user_nama,$gambar,$deskripsi);
 							echo $this->session->set_flashdata('msg','info');
 							redirect('admin/album');
 	                    
@@ -113,7 +120,7 @@ class Album extends CI_Controller{
 							$p=$user->row_array();
 							$user_id=$p['pengguna_id'];
 							$user_nama=$p['pengguna_nama'];
-							$this->m_album->update_album_tanpa_img($album_id,$album_nama,$user_id,$user_nama);
+							$this->m_album->update_album_tanpa_img($album_id,$album_nama,$user_id,$user_nama,$deskripsi);
 							echo $this->session->set_flashdata('msg','info');
 							redirect('admin/album');
 	            } 

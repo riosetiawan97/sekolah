@@ -28,6 +28,24 @@ class M_siswa extends CI_Model{
 		return $hsl;
 	}
 
+	function get_absen_siswa(){
+		$hsl=$this->db->query("SELECT * FROM tbl_absen WHERE tipe='siswa'");
+		return $hsl;
+	}
+	function hapus_absen_siswa($id){
+		$hsl=$this->db->query("DELETE FROM tbl_absen WHERE tipe='siswa' AND id='$id'");
+		return $hsl;
+	}
+	function simpan_absen_siswa($tipe,$nama,$kelas,$jurusan,$tanggal,$waktu){
+		$hsl=$this->db->query("INSERT INTO tbl_absen (tipe,nama,kelas,jurusan,tanggal,waktu) VALUES ('$tipe','$nama','$kelas','$jurusan','$tanggal','$waktu')");
+		return $hsl;
+	}
+
+	function absen_siswa_range($tanggal1,$tanggal2){
+		$hsl=$this->db->query("SELECT * FROM `tbl_absen` WHERE tipe='siswa' AND tanggal BETWEEN '$tanggal1' AND '$tanggal2' ORDER BY tanggal");
+		return $hsl;
+	}
+
 	function siswa(){
 		$hsl=$this->db->query("SELECT tbl_siswa.*,kelas_nama FROM tbl_siswa JOIN tbl_kelas ON siswa_kelas_id=kelas_id");
 		return $hsl;
@@ -36,5 +54,4 @@ class M_siswa extends CI_Model{
 		$hsl=$this->db->query("SELECT tbl_siswa.*,kelas_nama FROM tbl_siswa JOIN tbl_kelas ON siswa_kelas_id=kelas_id limit $offset,$limit");
 		return $hsl;
 	}
-
 }

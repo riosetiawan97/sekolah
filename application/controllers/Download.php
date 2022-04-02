@@ -5,12 +5,15 @@ class Download extends CI_Controller{
 		$this->load->model('m_files');
 		$this->load->helper('download');
 		$this->load->model('m_pengunjung');
+		$this->load->model('m_setup');
 		$this->m_pengunjung->count_visitor();
 	}
 	function index(){
+		$x['setup']=$this->m_setup->get_setup()->row();
 		$x['data']=$this->m_files->get_all_files();
+		$nama_sekolah=$x['setup']->nama_sekolah;
 		//$this->load->view('depan/v_download',$x);
-		$x['title']="Sekolah | Download";
+		$x['title']="$nama_sekolah | Download";
 		$this->template->load('template_depan', 'depan/v_download', $x);
 	}
 

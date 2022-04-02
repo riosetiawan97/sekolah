@@ -8,6 +8,7 @@ class Pengguna extends CI_Controller{
         };
 		$this->load->model('m_pengguna');
 		$this->load->library('upload');
+		$this->load->model('m_setup');
 	}
 
 
@@ -15,7 +16,11 @@ class Pengguna extends CI_Controller{
 		$kode=$this->session->userdata('idadmin');
 		$x['user']=$this->m_pengguna->get_pengguna_login($kode);
 		$x['data']=$this->m_pengguna->get_all_pengguna();
-		$this->load->view('admin/v_pengguna',$x);
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_pengguna',$x);
+		$x['title']="Admin $nama_sekolah | Pengguna";
+		$this->template->load('template_admin', 'admin/v_pengguna', $x);
 	}
 
 	function simpan_pengguna(){

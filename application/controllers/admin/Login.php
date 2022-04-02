@@ -3,9 +3,13 @@ class Login extends CI_Controller{
     function __construct(){
         parent:: __construct();
         $this->load->model('m_login');
+		$this->load->model('m_setup');
     }
     function index(){
-        $this->load->view('admin/v_login');
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		$x['title']="$nama_sekolah | Home";
+        $this->load->view('admin/v_login',$x);
     }
     function auth(){
         $username=strip_tags(str_replace("'", "", $this->input->post('username')));

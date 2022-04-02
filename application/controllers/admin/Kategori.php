@@ -8,12 +8,17 @@ class Kategori extends CI_Controller{
         };
 		$this->load->model('m_kategori');
 		$this->load->library('upload');
+		$this->load->model('m_setup');
 	}
 
 
 	function index(){
 		$x['data']=$this->m_kategori->get_all_kategori();
-		$this->load->view('admin/v_kategori',$x);
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_kategori',$x);
+		$x['title']="Admin $nama_sekolah | Kategori";
+		$this->template->load('template_admin', 'admin/v_kategori', $x);
 	}
 
 	function simpan_kategori(){

@@ -10,13 +10,18 @@ class Files extends CI_Controller{
 		$this->load->model('m_pengguna');
 		$this->load->library('upload');
 		$this->load->helper('download');
+		$this->load->model('m_setup');
 	}
 
 
 	function index(){
 		
 		$x['data']=$this->m_files->get_all_files();
-		$this->load->view('admin/v_files',$x);
+		$x['setup']=$this->m_setup->get_setup()->row();
+		$nama_sekolah=$x['setup']->nama_sekolah;
+		//$this->load->view('admin/v_files',$x);
+		$x['title']="Admin $nama_sekolah | Files";
+		$this->template->load('template_admin', 'admin/v_files', $x);
 	}
 
 	function download(){

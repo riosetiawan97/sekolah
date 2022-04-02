@@ -28,6 +28,19 @@ class M_guru extends CI_Model{
 		return $hsl;
 	}
 
+	function get_absen_guru(){
+		$hsl=$this->db->query("SELECT * FROM tbl_absen WHERE tipe='guru'");
+		return $hsl;
+	}
+	function hapus_absen_guru($id){
+		$hsl=$this->db->query("DELETE FROM tbl_absen WHERE tipe='guru' AND id='$id'");
+		return $hsl;
+	}
+	function simpan_absen_guru($tipe,$nama,$tanggal,$waktu){
+		$hsl=$this->db->query("INSERT INTO tbl_absen (tipe,nama,tanggal,waktu) VALUES ('$tipe','$nama','$tanggal','$waktu')");
+		return $hsl;
+	}
+
 	//front-end
 	function guru(){
 		$hsl=$this->db->query("SELECT * FROM tbl_guru");

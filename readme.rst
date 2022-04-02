@@ -1,3 +1,8 @@
+untuk Clone Github : git Clone URL
+Untuk Push : git add .
+git commit -m "Judul"
+git Push origin master
+
 ###################
 What is CodeIgniter
 ###################
