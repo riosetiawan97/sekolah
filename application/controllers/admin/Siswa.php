@@ -138,14 +138,16 @@ class Siswa extends CI_Controller{
 		redirect('admin/siswa');
 	}
 
-	function absen(){		
-		$start_date=str_replace("-","",$this->input->post('start_date'));
+	function absen(){
+		$start_date=date_format(date_create(substr($this->input->post('date_range'),0,strpos($this->input->post('date_range'),"- "))),"Ymd");
+		$end_date=date_format(date_create(substr($this->input->post('date_range'),strpos($this->input->post('date_range'),"- ")+2,10)),"Ymd");
 		if(!empty($start_date)){
-			$x['data']=$this->m_siswa->absen_siswa_range($start_date,$start_date);
+			$x['data']=$this->m_siswa->absen_siswa_range($start_date,$end_date);
 		}else{
 			$x['data']=$this->m_siswa->get_absen_siswa();
 		}
 		$x['start_date']=$start_date;
+		$x['end_date']=$end_date;
 		$x['setup']=$this->m_setup->get_setup()->row();
 		$nama_sekolah=$x['setup']->nama_sekolah;
 		//$this->load->view('admin/v_guru',$x);
@@ -159,14 +161,4 @@ class Siswa extends CI_Controller{
 		echo $this->session->set_flashdata('msg','success-hapus');
 		redirect('admin/siswa/absen');
 	}
-
-	public function absen_range(){
-		$start_date = $_POST['start_date'];
-		$end_date = $_POST['end_date'];
-	
-		$return = $this->m_siswa->absen_siswa_range($start_date,$end_date);
-	
-		echo json_encode($return);
-	}
-
 }
