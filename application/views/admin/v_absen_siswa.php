@@ -29,7 +29,7 @@
 								  <div class="input-group-addon">
 									<i class="fa fa-calendar"></i>
 								  </div>
-								  <input type="text" class="form-control pull-right" id="reservation" name="date_range">
+								  <input type="text" class="form-control pull-right" id="reservation" name="date_range" value="<?php echo $default_start_date.' - '.$default_end_date;?>">
 								</div>
 							</div>							
 						</div>

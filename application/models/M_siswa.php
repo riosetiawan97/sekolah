@@ -45,6 +45,11 @@ class M_siswa extends CI_Model{
 		$hsl=$this->db->query("SELECT * FROM `tbl_absen` WHERE tipe='siswa' AND tanggal BETWEEN '$tanggal1' AND '$tanggal2' ORDER BY tanggal");
 		return $hsl;
 	}
+	
+	function tanggal_awal_absen(){
+		$hsl=$this->db->query("SELECT tanggal FROM `tbl_absen` ORDER BY `tbl_absen`.`tanggal` LIMIT 0, 1");
+		return $hsl;
+	}
 
 	function siswa(){
 		$hsl=$this->db->query("SELECT tbl_siswa.*,kelas_nama FROM tbl_siswa JOIN tbl_kelas ON siswa_kelas_id=kelas_id");

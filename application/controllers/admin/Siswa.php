@@ -139,15 +139,32 @@ class Siswa extends CI_Controller{
 	}
 
 	function absen(){
-		$start_date=date_format(date_create(substr($this->input->post('date_range'),0,strpos($this->input->post('date_range'),"- "))),"Ymd");
-		$end_date=date_format(date_create(substr($this->input->post('date_range'),strpos($this->input->post('date_range'),"- ")+2,10)),"Ymd");
-		if(!empty($start_date)){
+		$post=$this->input->post('date_range');
+		if($post==''){
+			$x['tanggal_awal_absen']=$this->m_siswa->tanggal_awal_absen()->row();
+			$default_start_date=date_format(date_create($x['tanggal_awal_absen']->tanggal),"m/d/Y");
+			$default_end_date=date("m/d/Y");
+			$start_date=date_format(date_create($x['tanggal_awal_absen']->tanggal),"Ymd");
+			$end_date=date("Ymd");
+		}else{				
+			$default_start_date=date_format(date_create(substr($this->input->post('date_range'),0,strpos($this->input->post('date_range'),"- "))),"m/d/Y");
+			$default_end_date=date_format(date_create(substr($this->input->post('date_range'),strpos($this->input->post('date_range'),"- ")+2,10)),"m/d/Y");
+			$start_date=date_format(date_create(substr($this->input->post('date_range'),0,strpos($this->input->post('date_range'),"- "))),"Ymd");
+			$end_date=date_format(date_create(substr($this->input->post('date_range'),strpos($this->input->post('date_range'),"- ")+2,10)),"Ymd");
+		}
+		$x['data']=$this->m_siswa->absen_siswa_range($start_date,$end_date);
+		/*
+		if(!empty($start_date) or !empty($end_date)){
 			$x['data']=$this->m_siswa->absen_siswa_range($start_date,$end_date);
 		}else{
 			$x['data']=$this->m_siswa->get_absen_siswa();
-		}
+		}*/
+		$x['default_start_date']=$default_start_date;
+		$x['default_end_date']=$default_end_date;
 		$x['start_date']=$start_date;
 		$x['end_date']=$end_date;
+		$x['post']=$post;
+		
 		$x['setup']=$this->m_setup->get_setup()->row();
 		$nama_sekolah=$x['setup']->nama_sekolah;
 		//$this->load->view('admin/v_guru',$x);
