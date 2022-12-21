@@ -107,7 +107,7 @@
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav"> 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo site_url('');?>">Home</a>
+                                    <a class="nav-link" href="<?php echo site_url('');?>">Hometes</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo site_url('about');?>">About</a>
