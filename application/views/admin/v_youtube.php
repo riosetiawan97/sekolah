@@ -16,6 +16,9 @@
       <div class="box">
 
       <div class="box">
+        <div class="box-header">
+          <a class="btn btn-success btn-flat" data-toggle="modal" data-target="#myModal"><span class="fa fa-plus"></span> Add Youtube</a>
+        </div>
         <!-- /.box-header -->
         <div class="box-body">
           <table id="example1" class="table table-striped" style="font-size:13px;">
@@ -45,6 +48,7 @@
               <td><?php echo $youtube_tanggal;?></td>
               <td style="text-align:right;">
                     <a class="btn" data-toggle="modal" data-target="#ModalEdit<?php echo $youtube_id;?>"><span class="fa fa-pencil"></span></a>
+                    <a class="btn" data-toggle="modal" data-target="#ModalHapus<?php echo $youtube_id;?>"><span class="fa fa-trash"></span></a>
               </td>
             </tr>
     <?php endforeach;?>
@@ -59,6 +63,33 @@
   </div>
   <!-- /.row -->
 </section>
+
+<!--Modal Add Youtube-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                <h4 class="modal-title" id="myModalLabel">Add Youtube</h4>
+            </div>
+            <form class="form-horizontal" action="<?php echo base_url().'admin/youtube/simpan_youtube'?>" method="post" enctype="multipart/form-data">
+            <div class="modal-body">
+              <div class="form-group">
+                  <label for="inpuyoutubelink" class="col-sm-4 control-label">Link Youtube</label>
+                  <div class="col-sm-7">
+                      <input type="text" name="youtube_link" class="form-control" id="inpuyoutubelink" placeholder="Link Youtube" required>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary btn-flat" id="simpan">Simpan</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Modal Add Youtube-->
 
 <!--Modal Edit Youtube-->
 <?php foreach ($data->result_array() as $i) :
@@ -95,6 +126,38 @@
     </div>
 <?php endforeach;?>
 <!--Modal Edit Youtube-->
+
+<!--Modal Hapus Youtube-->
+<?php foreach ($data->result_array() as $i) :
+          $youtube_id=$i['youtube_id'];
+          $youtube_link=$i['youtube_link'];
+          $youtube_author=$i['youtube_author'];
+          $youtube_tanggal=$i['youtube_tanggal'];
+        ?>
+
+    <div class="modal fade" id="ModalHapus<?php echo $youtube_id;?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><span class="fa fa-close"></span></span></button>
+                    <h4 class="modal-title" id="myModalLabel">Hapus Youtube</h4>
+                </div>
+                <form class="form-horizontal" action="<?php echo base_url().'admin/youtube/hapus_youtube'?>" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                  <input type="hidden" name="kode" value="<?php echo $youtube_id;?>"/>
+                        <p>Apakah Anda yakin mau menghapus Youtube Link : <b><?php echo $youtube_link;?></b> ?</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-flat" id="simpan">Hapus</button>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach;?>
+<!--Modal Hapus Youtube-->
 
 <?php if($this->session->flashdata('msg')=='error'):?>
     <script type="text/javascript">

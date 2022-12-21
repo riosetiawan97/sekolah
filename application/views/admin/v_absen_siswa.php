@@ -20,24 +20,30 @@
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example1" class="table table-striped" style="font-size:12px;">
-                <div class="row">
-                <form action="<?php echo site_url('admin/siswa/absen');?>" method="post">
-                    <div class="form-group">
-                        <label>From</label>
-                        <div class="input-group date">
-                          <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                          </div>
-                          <input type="text" class="form-control pull-right" id="datepicker" name="start_date">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-default btn-submit">SUBMIT</button>
-                </form>
-                </div>  
-                <?php echo $start_date ?>
+                <div class="row">			
+					<form action="<?php echo site_url('admin/siswa/absen');?>" method="post">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Date Range</label>
+								<div class="input-group">
+								  <div class="input-group-addon">
+									<i class="fa fa-calendar"></i>
+								  </div>
+								  <input type="text" class="form-control pull-right" id="reservation" name="date_range" value="<?php echo $default_start_date.' - '.$default_end_date;?>">
+								</div>
+							</div>							
+						</div>
+						<div class="col-md-4">						
+							<label>Submit</label>
+							<div class="input-group date">
+								<button type="submit" class="btn btn-default btn-submit">SUBMIT</button>
+							</div>
+						</div>
+					</form>					
+				</div>
                 <thead>
                 <tr>
-					          <th style="width:70px;">#Tanggal</th>
+					<th style="width:70px;">#Tanggal</th>
                     <th>Jam</th>
                     <th>Nama</th>
                     <th>Kelas</th>

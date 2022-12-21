@@ -89,16 +89,17 @@
     </div>
 </section>
 
+<!--============================= Youtube =============================-->
 <section class="event">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
             <?php foreach ($youtube->result() as $row) :?>
+            <div class="col-md-6 mb-4">
                 <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="<?php echo 'https://www.youtube.com/embed/'.substr($row->youtube_link,strpos($row->youtube_link,"=")+1);?>" frameborder="0" allowfullscreen></iframe>
-                </div>    
-            <?php endforeach;?>
+                </div>
             </div>
+            <?php endforeach;?>
         </div>
     </div>
 </section>
