@@ -15,9 +15,9 @@ class Agenda extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_agenda->get_all_agenda();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_agenda',$x);
-		$x['title']="Admin $nama_sekolah | Agenda";
+		$x['title']="Admin $judul_website | Agenda";
 		$this->template->load('template_admin', 'admin/v_agenda', $x);
 	}
 

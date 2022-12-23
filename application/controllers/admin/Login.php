@@ -7,8 +7,8 @@ class Login extends CI_Controller{
     }
     function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
-		$x['title']="$nama_sekolah | Home";
+		$judul_website=$x['setup']->judul_website;
+		$x['title']="$judul_website | Home";
         $this->load->view('admin/v_login',$x);
     }
     function auth(){

@@ -7,9 +7,9 @@ class visi_misi extends CI_Controller{
 	}
 	function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('depan/v_visi_misi');
-		$x['title']="$nama_sekolah | Visi Misi";
+		$x['title']="$judul_website | Visi Misi";
 		$this->template->load('template_depan', 'depan/v_visi_misi', $x);
 	}
 }

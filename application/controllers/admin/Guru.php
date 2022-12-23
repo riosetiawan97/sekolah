@@ -16,9 +16,9 @@ class Guru extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_guru->get_all_guru();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_guru',$x);
-		$x['title']="Admin $nama_sekolah | Guru";
+		$x['title']="Admin $judul_website | Guru";
 		$this->template->load('template_admin', 'admin/v_guru', $x);
 	}
 	

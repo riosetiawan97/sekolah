@@ -15,9 +15,9 @@ class Brosur extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_brosur->get_all_brosur();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_brosur',$x);
-		$x['title']="Admin $nama_sekolah | Brosur";
+		$x['title']="Admin $judul_website | Brosur";
 		$this->template->load('template_admin', 'admin/v_brosur', $x);
 	}
 		

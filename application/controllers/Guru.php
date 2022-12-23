@@ -10,9 +10,9 @@ class Guru extends CI_Controller{
 
 	function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 			  //$this->load->view('depan/v_contact');      
-		  $x['title']="$nama_sekolah | Absen Guru";
+		  $x['title']="$judul_website | Absen Guru";
 		  $this->template->load('template_depan', 'depan/v_absen_guru', $x);
 		}
 	
@@ -59,11 +59,11 @@ class Guru extends CI_Controller{
 		$config['prev_link'] = '<< Prev';
 		$this->pagination->initialize($config);
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		$x['page'] =$this->pagination->create_links();
 		$x['data']=$this->m_guru->guru_perpage($offset,$limit);
 		//$this->load->view('depan/v_guru',$x);
-		$x['title']="$nama_sekolah | Guru";
+		$x['title']="$judul_website | Guru";
 		$this->template->load('template_depan', 'depan/v_guru', $x);
 	} */
 }

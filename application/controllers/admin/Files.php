@@ -18,9 +18,9 @@ class Files extends CI_Controller{
 		
 		$x['data']=$this->m_files->get_all_files();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_files',$x);
-		$x['title']="Admin $nama_sekolah | Files";
+		$x['title']="Admin $judul_website | Files";
 		$this->template->load('template_admin', 'admin/v_files', $x);
 	}
 

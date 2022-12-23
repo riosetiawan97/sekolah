@@ -13,9 +13,9 @@ class Komentar extends CI_Controller{
     function index(){
         $x['data']=$this->db->query("SELECT tbl_komentar.*,tulisan_judul,tulisan_slug FROM tbl_komentar JOIN tbl_tulisan ON komentar_tulisan_id=tulisan_id ORDER BY komentar_id DESC");
         $x['setup']=$this->m_setup->get_setup()->row();
-        $nama_sekolah=$x['setup']->nama_sekolah;
+        $judul_website=$x['setup']->judul_website;
         //$this->load->view('admin/v_komentar',$x);
-		$x['title']="Admin $nama_sekolah | Komentar";
+		$x['title']="Admin $judul_website | Komentar";
 		$this->template->load('template_admin', 'admin/v_komentar', $x);
     }
 

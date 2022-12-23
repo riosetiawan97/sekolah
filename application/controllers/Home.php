@@ -26,9 +26,9 @@ class Home extends CI_Controller{
 			$x['brosur']=$this->m_brosur->get_brosur();
 			$x['pamflet']=$this->m_brosur->get_pamflet();
 			$x['youtube']=$this->m_youtube->get_all_youtube();
-			$nama_sekolah=$x['setup']->nama_sekolah;
+			$judul_website=$x['setup']->judul_website;
 			//$this->load->view('depan/v_home',$x);
-			$x['title']="$nama_sekolah | Home";
+			$x['title']="$judul_website | Home";
 			$this->template->load('template_depan', 'depan/v_home', $x);
 	}
 

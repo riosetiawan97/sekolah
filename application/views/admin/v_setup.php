@@ -69,6 +69,10 @@
         <label>Instagram</label>
         <input type="text" name="instagram" class="form-control" value="<?php echo $b['instagram'];?>" placeholder="Instagram" required/>
       </div>
+      <div class="form-group">
+        <label>Judul Website</label>
+        <input type="text" name="judul_website" class="form-control" value="<?php echo $b['judul_website'];?>" placeholder="Judul Website" required/>
+      </div>
     <!-- /.box-body -->
     </div>
     <div class="modal-footer">

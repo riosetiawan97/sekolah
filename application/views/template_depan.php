@@ -46,6 +46,10 @@
         text-decoration: none;
     	}
     </style>
+        <meta property="og:title" content="SMK Kesehatan Al Hadiriyah" />
+        <meta name="title" content="SMK Kesehatan dan Keperawatan Al Hadiriyah" />
+        <meta name="description" content="SMK Al Hadiriyah adalah SMK Kesehatan dan Keperawatan di Duren Sawit, Jakarta Timur" />
+        <meta name="keywords" content="SMK Al Hadiriyah adalah SMK Kesehatan dan Keperawatan di Duren Sawit, Jakarta Timur" />
     <?php
     if($this->uri->segment(1) == 'artikel' OR $this->uri->segment(2) == 'album') { ?>
         <meta property="og:title" content="<?php echo $title ?>" />
@@ -107,7 +111,7 @@
                         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                             <ul class="navbar-nav"> 
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo site_url('');?>">Hometes</a>
+                                    <a class="nav-link" href="<?php echo site_url('');?>">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo site_url('about');?>">About</a>
@@ -140,7 +144,7 @@
                                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">PPDB</a>
                                     <div class="dropdown-menu">
                                     <a class="dropdown-item" href="<?php echo site_url('alur_pendaftaran');?>">Alur Pendaftaran</a>
-                                    <a class="dropdown-item" href="<?php echo site_url('pendaftaran');?>">Daftar Sekarang</a>
+                                    <a class="dropdown-item" href="<?php echo $setup->formpendaftaran;?>" target="_blank">Daftar Sekarang</a>
                                     </div>
                                 </li>
                              </ul>
@@ -160,7 +164,7 @@
                     <h3>Hubungi Kami</h3>
                     <ul class="footer-social-icons">
                         <li><a href="https://www.facebook.com/<?php echo $setup->facebook;?>" target="_blank"><i class="fa fa-facebook fa-fb" aria-hidden="true"></i></a></li>
-                        <li><a href="https://wa.me/6283891475606" target="_blank"><i class="fa fa-whatsapp fa-wa" aria-hidden="true"></i></a></li>
+                        <li><a href="https://wa.me/<?php echo (substr($setup->whatsapp,0,1)=='0') ? '62'.substr($setup->whatsapp,1) : $setup->whatsapp ;?>" target="_blank"><i class="fa fa-whatsapp fa-wa" aria-hidden="true"></i></a></li>
                         <li><a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram fa-is" aria-hidden="true"></i></a></li>
                         <!-- <li><a href="#"><i class="fa fa-linkedin fa-in" aria-hidden="true"></i></a></li>
                         <li><a href="#"><i class="fa fa-twitter fa-tw" aria-hidden="true"></i></a></li> -->
@@ -168,7 +172,7 @@
                     <br><br>
                     <p><span>Phone : </span><br><?php echo $setup->telepon;?>
                     <br><span>Email : </span><br><?php echo $setup->email;?>
-                    <br><span>Alamat: </span><br><?php echo $setup->kecamatan.' , '.$setup->kota;?></p>
+                    <br><span>Alamat: </span><br><?php echo $setup->alamat;?></p>
                 </div>
             </div>
             <div class="col-md-3">
@@ -192,7 +196,7 @@
                         <li><a href="<?php echo site_url('pengumuman');?>">Pengumuman</a></li>
                         <li><a href="<?php echo site_url('agenda');?>">Agenda</a></li>
                         <li><a href="<?php echo site_url('alur_pendaftaran');?>">Alur Pendaftaran</a></li>
-                        <li><a href="<?php echo site_url('pendaftaran');?>">Daftar Sekarang</a></li>
+                        <li><a href="<?php echo $setup->formpendaftaran;?>" target="_blank">Daftar Sekarang</a></li>
                         <!-- <li><a href="<?php #echo site_url('download');?>">Download</a></li> -->
                     </ul>
                 </div>

@@ -17,9 +17,9 @@ class Pengguna extends CI_Controller{
 		$x['user']=$this->m_pengguna->get_pengguna_login($kode);
 		$x['data']=$this->m_pengguna->get_all_pengguna();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_pengguna',$x);
-		$x['title']="Admin $nama_sekolah | Pengguna";
+		$x['title']="Admin $judul_website | Pengguna";
 		$this->template->load('template_admin', 'admin/v_pengguna', $x);
 	}
 

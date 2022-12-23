@@ -19,6 +19,10 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
+          <p>Jika Form Pendaftaran tidak muncul Klik Link berikut ini : 
+            <a href="<?php echo $setup->formpendaftaran;?>" target="_blank" class="btn btn-primary btn-blogsearch">Pendaftaran
+            </a>
+          </p>
           <iframe src="<?php echo $setup->formpendaftaran;?>" width="100%" height="3700px" frameborder="0"></iframe>
         </div>
         <!-- /.box-body -->

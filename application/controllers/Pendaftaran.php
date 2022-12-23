@@ -8,8 +8,8 @@ class Pendaftaran extends CI_Controller{
 	}
 	function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
-		$x['title']="$nama_sekolah | Pendaftaran";
+		$judul_website=$x['setup']->judul_website;
+		$x['title']="$judul_website | Pendaftaran";
 		$this->template->load('template_depan', 'depan/v_pendaftaran', $x);
 	}
 }

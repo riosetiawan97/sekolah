@@ -14,9 +14,9 @@ class Alur_Pendaftaran extends CI_Controller{
 
 	function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		$x['data']=$this->m_alur_pendaftaran->get_all_alur_pendaftaran();
-		$x['title']="Admin $nama_sekolah | Alur Pendaftaran";
+		$x['title']="Admin $judul_website | Alur Pendaftaran";
 		$this->template->load('template_admin', 'admin/v_alur_pendaftaran', $x);
 	}
 

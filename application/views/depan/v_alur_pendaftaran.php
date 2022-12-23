@@ -18,7 +18,18 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-        <img src="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>" class="img-fluid" alt="Responsive image">
+          <div class="row" id="gallery">
+            <div class="col-md-6" id="gallery-content">
+              <a href="<?php echo base_url().'assets/images/'.$brosur->brosur_gambar;?>" class="image-link2">
+                <img src="<?php echo base_url().'assets/images/'.$brosur->brosur_gambar;?>" class="img-fluid" alt="Responsive image">
+              </a>
+            </div>
+            <div class="col-md-6" id="gallery-content">
+              <a href="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>" class="image-link2">
+                <img src="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>" class="img-fluid" alt="Responsive image">
+              </a>
+            </div>
+          </div>
         </div>
         <!-- /.box-body -->
         <!-- <div class="box-footer">

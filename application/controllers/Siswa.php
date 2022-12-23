@@ -10,9 +10,9 @@ class Siswa extends CI_Controller{
 
 	function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 			  //$this->load->view('depan/v_contact');      
-		  $x['title']="$nama_sekolah | Absen Siswa";
+		  $x['title']="$judul_website | Absen Siswa";
 		  $this->template->load('template_depan', 'depan/v_absen_siswa', $x);
 		}
 	
@@ -62,9 +62,9 @@ class Siswa extends CI_Controller{
             $x['page'] =$this->pagination->create_links();
 			$x['data']=$this->m_siswa->siswa_perpage($offset,$limit);
 			$x['setup']=$this->m_setup->get_setup()->row();
-			$nama_sekolah=$x['setup']->nama_sekolah;
+			$judul_website=$x['setup']->judul_website;
 			//$this->load->view('depan/v_siswa',$x);
-			$x['title']="$nama_sekolah | Siswa";
+			$x['title']="$judul_website | Siswa";
 			$this->template->load('template_depan', 'depan/v_siswa', $x);
 	} */
 

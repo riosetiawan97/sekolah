@@ -15,9 +15,9 @@ class Kategori extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_kategori->get_all_kategori();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_kategori',$x);
-		$x['title']="Admin $nama_sekolah | Kategori";
+		$x['title']="Admin $judul_website | Kategori";
 		$this->template->load('template_admin', 'admin/v_kategori', $x);
 	}
 

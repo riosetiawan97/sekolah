@@ -17,9 +17,9 @@ class Siswa extends CI_Controller{
 		$x['kelas']=$this->m_kelas->get_all_kelas();
 		$x['data']=$this->m_siswa->get_all_siswa();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_siswa',$x);
-		$x['title']="Admin $nama_sekolah | Siswa";
+		$x['title']="Admin $judul_website | Siswa";
 		$this->template->load('template_admin', 'admin/v_siswa', $x);
 	}
 	

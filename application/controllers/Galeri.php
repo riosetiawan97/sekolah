@@ -10,16 +10,16 @@ class Galeri extends CI_Controller{
 	}
 	function index(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		$x['alb']=$this->m_album->get_all_album();
 		$x['all_galeri']=$this->m_galeri->get_all_galeri();
 		//$this->load->view('depan/v_galeri',$x);
-		$x['title']="$nama_sekolah | Galeri";
+		$x['title']="$judul_website | Galeri";
 		$this->template->load('template_depan', 'depan/v_galeri', $x);
 	}
 	function album(){
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		$idalbum=$this->uri->segment(3);
 		$x['data']=$this->m_galeri->get_galeri_by_album_id($idalbum);
 		$dataalbum=$this->m_album->get_album_by_kode($idalbum);
@@ -31,8 +31,8 @@ class Galeri extends CI_Controller{
 		$x['album_cover']=$rowalbum['album_cover'];
 		$x['album_deskripsi']=$rowalbum['album_deskripsi'];
 		//$this->load->view('depan/v_galeri_per_album',$x);
-		//$x['title']="$nama_sekolah | Album";
-		$x['title']=$rowalbum['album_nama'].' | '.$nama_sekolah;
+		//$x['title']="$judul_website | Album";
+		$x['title']=$rowalbum['album_nama'].' | '.$judul_website;
 		$x['gambar']=$rowalbum['album_cover'];
 		$x['blog']=$rowalbum['album_nama'];
 		$this->template->load('template_depan', 'depan/v_galeri_per_album', $x);

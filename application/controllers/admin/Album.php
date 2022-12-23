@@ -16,9 +16,9 @@ class Album extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_album->get_all_album();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_album',$x);
-		$x['title']="Admin $nama_sekolah | Album";
+		$x['title']="Admin $judul_website | Album";
 		$this->template->load('template_admin', 'admin/v_album', $x);
 	}
 	

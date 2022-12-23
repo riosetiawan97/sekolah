@@ -14,9 +14,9 @@ class Youtube extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_youtube->get_all_youtube();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_youtube',$x);
-		$x['title']="Admin $nama_sekolah | Youtube";
+		$x['title']="Admin $judul_website | Youtube";
 		$this->template->load('template_admin', 'admin/v_youtube', $x);
 	}
 	function simpan_youtube(){

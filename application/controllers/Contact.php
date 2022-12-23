@@ -9,9 +9,9 @@ class Contact extends CI_Controller{
 	}
 	function index(){
     $x['setup']=$this->m_setup->get_setup()->row();
-    $nama_sekolah=$x['setup']->nama_sekolah;
+    $judul_website=$x['setup']->judul_website;
 		  //$this->load->view('depan/v_contact');      
-      $x['title']="$nama_sekolah | Contact";
+      $x['title']="$judul_website | Contact";
       $this->template->load('template_depan', 'depan/v_contact', $x);
 	}
 

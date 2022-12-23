@@ -43,9 +43,9 @@ class Agenda extends CI_Controller{
 		$x['page'] =$this->pagination->create_links();
 		$x['data']=$this->m_agenda->agenda_perpage($offset,$limit);		
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('depan/v_agenda',$x);
-		$x['title']="$nama_sekolah | Agenda";
+		$x['title']="$judul_website | Agenda";
 		$this->template->load('template_depan', 'depan/v_agenda', $x);
 	}
 

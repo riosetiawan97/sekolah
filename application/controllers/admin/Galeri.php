@@ -19,9 +19,9 @@ class Galeri extends CI_Controller{
 		$x['data']=$this->m_galeri->get_all_galeri();
 		$x['alb']=$this->m_album->get_all_album();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_galeri',$x);
-		$x['title']="Admin $nama_sekolah | Galeri";
+		$x['title']="Admin $judul_website | Galeri";
 		$this->template->load('template_admin', 'admin/v_galeri', $x);
 	}
 	

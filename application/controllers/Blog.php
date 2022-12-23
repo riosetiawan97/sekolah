@@ -45,9 +45,9 @@ class Blog extends CI_Controller{
 			$x['category']=$this->db->get('tbl_kategori');
 			$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
 			$x['setup']=$this->m_setup->get_setup()->row();
-			$nama_sekolah=$x['setup']->nama_sekolah;
+			$judul_website=$x['setup']->judul_website;
 			//$this->load->view('depan/v_blog',$x);
-			$x['title']="$nama_sekolah | Blog";
+			$x['title']="$judul_website | Blog";
 			$this->template->load('template_depan', 'depan/v_blog', $x);
 	}
 	function detail($slugs){
@@ -71,9 +71,9 @@ class Blog extends CI_Controller{
 			$x['category']=$this->db->get('tbl_kategori');
 			$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
 			$x['setup']=$this->m_setup->get_setup()->row();
-			$nama_sekolah=$x['setup']->nama_sekolah;
+			$judul_website=$x['setup']->judul_website;
 			//$this->load->view('depan/v_blog_detail',$x);
-			//$x['title']="$nama_sekolah | Detail Blog";
+			//$x['title']="$judul_website | Detail Blog";
 			$x['title']=$row['tulisan_judul'];
 			$x['gambar']=$row['tulisan_gambar'];
 			$this->template->load('template_depan', 'depan/v_blog_detail', $x);
@@ -90,9 +90,9 @@ class Blog extends CI_Controller{
 			 $x['category']=$this->db->get('tbl_kategori');
  			 $x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
 			  $x['setup']=$this->m_setup->get_setup()->row();
-			  $nama_sekolah=$x['setup']->nama_sekolah;
+			  $judul_website=$x['setup']->judul_website;
 			 //$this->load->view('depan/v_blog',$x);
-			 $x['title']="$nama_sekolah | Blog (".$x['category']->row()->kategori_nama .")";
+			 $x['title']="$judul_website | Blog (".$x['category']->row()->kategori_nama .")";
 			 $this->template->load('template_depan', 'depan/v_blog', $x);
 		 }else{
 			 echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-dismissible" ><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>Tidak Ada artikel untuk kategori <b>'.$kategori.'</b></div>');
@@ -109,9 +109,9 @@ class Blog extends CI_Controller{
 					$x['category']=$this->db->get('tbl_kategori');
   				$x['populer']=$this->db->query("SELECT * FROM tbl_tulisan ORDER BY tulisan_views DESC LIMIT 5");
 				  $x['setup']=$this->m_setup->get_setup()->row();
-				  $nama_sekolah=$x['setup']->nama_sekolah;
+				  $judul_website=$x['setup']->judul_website;
          // $this->load->view('depan/v_blog',$x);
-		  $x['title']="$nama_sekolah | Blog";
+		  $x['title']="$judul_website | Blog";
 		  $this->template->load('template_depan', 'depan/v_blog', $x);
 	 		 }else{
 				 echo $this->session->set_flashdata('msg','<div class="alert alert-danger alert-dismissible">Tidak dapat menemukan artikel dengan kata kunci <b>'.$keyword.'</b></div>');

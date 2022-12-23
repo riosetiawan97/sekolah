@@ -13,9 +13,9 @@ class About extends CI_Controller{
 		$x['tot_files']=$this->db->get('tbl_files')->num_rows();
 		$x['tot_agenda']=$this->db->get('tbl_agenda')->num_rows();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('depan/v_about',$x);
-		$x['title']="$nama_sekolah | About";
+		$x['title']="$judul_website | About";
 		$this->template->load('template_depan', 'depan/v_about', $x);
 	}
 }

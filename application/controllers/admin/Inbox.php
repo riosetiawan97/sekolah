@@ -14,9 +14,9 @@ class Inbox extends CI_Controller{
 		$this->m_kontak->update_status_kontak();
 		$x['data']=$this->m_kontak->get_all_inbox();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_inbox',$x);
-		$x['title']="Admin $nama_sekolah | Inbox";
+		$x['title']="Admin $judul_website | Inbox";
 		$this->template->load('template_admin', 'admin/v_inbox', $x);
 	}
 

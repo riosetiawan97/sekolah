@@ -14,9 +14,9 @@ class Setup extends CI_Controller{
 	function index(){
 		$x['data']=$this->m_setup->get_setup();
 		$x['setup']=$this->m_setup->get_setup()->row();
-		$nama_sekolah=$x['setup']->nama_sekolah;
+		$judul_website=$x['setup']->judul_website;
 		//$this->load->view('admin/v_tulisan',$x);
-		$x['title']="Admin $nama_sekolah | Setup";
+		$x['title']="Admin $judul_website | Setup";
 		$this->template->load('template_admin', 'admin/v_setup', $x);
 	}
 
@@ -52,7 +52,8 @@ class Setup extends CI_Controller{
 				$gmaps=$this->input->post('gmaps');
 				$whatsapp=$this->input->post('whatsapp');
 				$instagram=$this->input->post('instagram');
-				$this->m_setup->update_setup($id,$gambar,$nama_sekolah,$kecamatan,$kota,$alamat,$telepon,$email,$facebook,$gmaps,$whatsapp,$instagram);
+				$judul_website=$this->input->post('judul_website');
+				$this->m_setup->update_setup($id,$gambar,$nama_sekolah,$kecamatan,$kota,$alamat,$telepon,$email,$facebook,$gmaps,$whatsapp,$instagram,$judul_website);
 				echo $this->session->set_flashdata('msg','info');
 				redirect('admin/setup');
 			}else{
@@ -71,7 +72,8 @@ class Setup extends CI_Controller{
 			$gmaps=$this->input->post('gmaps');
 			$whatsapp=$this->input->post('whatsapp');
 			$instagram=$this->input->post('instagram');
-			$this->m_setup->update_setup_tanpa_img($id,$nama_sekolah,$kecamatan,$kota,$alamat,$telepon,$email,$facebook,$gmaps,$whatsapp,$instagram);
+			$judul_website=$this->input->post('judul_website');
+			$this->m_setup->update_setup_tanpa_img($id,$nama_sekolah,$kecamatan,$kota,$alamat,$telepon,$email,$facebook,$gmaps,$whatsapp,$instagram,$judul_website);
 			echo $this->session->set_flashdata('msg','info');
 			redirect('admin/setup');
 		}
