@@ -60,30 +60,28 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <?php foreach ($brosur->result() as $row) :?>
                 <div id="gallery">
-                    <div id="gallery-content">
-                        <a href="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>" class="image-link2">
-                            <img src="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>" class="all img-fluid" alt="#">
-                        </a>
-                    </div>                        
+                    <?php foreach ($brosur->result() as $row) :?>
+                    <a data-magnify="gallery" data-caption="<?php echo $row->type;?>" 
+                    href="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>">
+                        <img src="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>" class="all img-fluid" alt="">
+                    </a>                    
+                    <?php endforeach;?>
                 </div>     
-            <?php endforeach;?>
             </div>
 
             <div class="col-md-6">
-            <?php foreach ($pamflet->result() as $row) :?>
                 <div class="short-div">
                     <div id="gallery">
-                        <div id="gallery-content">
-                            <a href="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>" class="image-link2">
-                                <img src="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>" class="all img-fluid" alt="#">
-                            </a>                    
-                        </div>                        
+                        <?php foreach ($pamflet->result() as $row) :?>
+                        <a data-magnify="gallery" data-caption="<?php echo $row->type;?>" 
+                        href="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>">
+                            <img src="<?php echo base_url().'assets/images/'.$row->brosur_gambar;?>" class="all img-fluid" alt="">
+                        </a>
+                        <?php endforeach;?>
                     </div>   
                 </div>
                 <br><br>                
-            <?php endforeach;?>
             </div>
         </div>
     </div>

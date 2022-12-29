@@ -12,16 +12,13 @@
             <br><br>
             <div class="row">
                 <div class="col-md-12">
-                    <div id="gallery">
-                        <div id="gallery-content">
-                            <div id="gallery-content-center">
-                            <?php foreach ($data->result() as $data) : ?>
-                                <a href="<?php echo base_url().'assets/images/'.$data->galeri_gambar;?>" class="image-link2">
-                                <img src="<?php echo base_url().'assets/images/'.$data->galeri_gambar;?>" class="all img-fluid" alt="#" />
-                                </a>
-                            <?php endforeach;?>
-                            </div>
-                        </div>
+                    <div id="gallery-content-center" class="image-set">
+                    <?php foreach ($data->result() as $data) : ?>
+                        <a data-magnify="gallery" data-caption="<?php echo $data->galeri_judul;?>" 
+                        href="<?php echo base_url().'assets/images/'.$data->galeri_gambar;?>">
+                        <img src="<?php echo base_url().'assets/images/'.$data->galeri_gambar;?>" alt="" />
+                        </a>
+                    <?php endforeach;?>
                     </div>
                 </div>
             </div>

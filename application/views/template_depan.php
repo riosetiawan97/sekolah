@@ -33,7 +33,9 @@
     <link href="<?php echo base_url().'theme/css/dataTables.bootstrap4.min.css'?>" rel="stylesheet">
     <!--Social Share-->
     <link href="<?php echo base_url().'theme/css/jssocials.css'?>" rel="stylesheet">
-    <link href="<?php echo base_url().'theme/css/jssocials-theme-flat.css'?>" rel="stylesheet">   
+    <link href="<?php echo base_url().'theme/css/jssocials-theme-flat.css'?>" rel="stylesheet">
+    <link href="<?php echo base_url().'theme/css/jquery.magnify.css'?>" rel="stylesheet">
+    <link href="<?php echo base_url().'theme/css/magnify-white-theme.css'?>" rel="stylesheet">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url().'assets/dist/css/AdminLTE.min.css'?>"> 
     <style>
@@ -46,10 +48,10 @@
         text-decoration: none;
     	}
     </style>
-        <meta property="og:title" content="SMK Kesehatan Al Hadiriyah" />
-        <meta name="title" content="SMK Kesehatan dan Keperawatan Al Hadiriyah" />
-        <meta name="description" content="SMK Al Hadiriyah adalah SMK Kesehatan dan Keperawatan di Duren Sawit, Jakarta Timur" />
-        <meta name="keywords" content="SMK Al Hadiriyah adalah SMK Kesehatan dan Keperawatan di Duren Sawit, Jakarta Timur" />
+        <meta property="og:title" content="SMK KESEHATAN AL-HADIRIYAH" />
+        <meta name="title" content="SMK KESEHATAN AL-HADIRIYAH - KEPERAWATAN DAN FARMASI" />
+        <meta name="description" content="SMK KESEHATAN Al Hadiriyah adalah SMK KEPERAWATAN DAN FARMASI di Duren Sawit, Jakarta Timur" />
+        <meta name="keywords" content="SMK KESEHATAN AL-HADIRIYAH adalah SMK KEPERAWATAN DAN FARMASI di Duren Sawit, Jakarta Timur" />
     <?php
     if($this->uri->segment(1) == 'artikel' OR $this->uri->segment(2) == 'album') { ?>
         <meta property="og:title" content="<?php echo $title ?>" />
@@ -278,8 +280,40 @@ function close() {
 }
 
 buttons.forEach(button => button.addEventListener('click', open));
-overlay.addEventListener('click', close);
 </script>
+
+
+<script src="<?php echo base_url().'theme/js/jquery.magnify.js'?>"></script>
+
+<script>
+   $('[data-magnify]').magnify({
+      headerToolbar: [
+        'close'
+      ],
+      footerToolbar: [
+        'prev',
+        'next',
+        'zoomIn',
+        'zoomOut',
+        'fullscreen',
+        'actualSize',
+        'rotateLeft',
+        'rotateRight',
+        'myCustomButton'
+      ],
+      modalWidth: 400,
+      modalHeight: 400,
+      callbacks: {
+        beforeChange: function (context, index) {
+          console.log(context, index)
+        },
+        changed: function (context, index) {
+          console.log(context, index)
+        }
+      },
+      initMaximized:true,
+    });
+  </script>
 
 </body>
 </html>

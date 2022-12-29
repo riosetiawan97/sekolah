@@ -18,15 +18,18 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <div class="row" id="gallery">
-            <div class="col-md-6" id="gallery-content">
-              <a href="<?php echo base_url().'assets/images/'.$brosur->brosur_gambar;?>" class="image-link2">
-                <img src="<?php echo base_url().'assets/images/'.$brosur->brosur_gambar;?>" class="img-fluid" alt="Responsive image">
+          <div class="row">
+            <div class="col-md-6">
+              <a data-magnify="gallery" data-caption="<?php echo $brosur->type;?>" 
+              href="<?php echo base_url().'assets/images/'.$brosur->brosur_gambar;?>">
+                <img src="<?php echo base_url().'assets/images/'.$brosur->brosur_gambar;?>" class="img-fluid" alt="">
               </a>
+              
             </div>
-            <div class="col-md-6" id="gallery-content">
-              <a href="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>" class="image-link2">
-                <img src="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>" class="img-fluid" alt="Responsive image">
+            <div class="col-md-6">
+              <a data-magnify="gallery" data-caption="Alur Pendaftaran" 
+              href="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>">
+                <img src="<?php echo base_url().'assets/images/'.$setup->alurpendaftaran;?>" class="img-fluid" alt="">
               </a>
             </div>
           </div>
